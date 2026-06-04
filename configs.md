@@ -61,6 +61,8 @@ CoRer is intrinsically two-pass and only uses the disk path (the analyzer needs 
 
 Steering modifies the residual stream in-place and produces no artifacts, so storage/format/async axes don't apply. Per-request via `extra_args["steer"]`.
 
+For steering configs, `apply_at_all_positions` controls whether steering continues during decode. `apply_to_all_tokens` controls token scope within the current forward slice: `false` steers only the last token in that slice, while `true` steers every token in the slice. During prefill this can affect all prompt tokens in the slice; during decode the slice is usually just the newly generated token. The all-token option is useful for global format-control steering, such as the no-comma demo, where applying the vector across prompt-token representations can be stronger than steering only the final prompt token.
+
 | Cell ID | Path |
 |---|---|
 | `actsteer-offline-na-na` | offline |

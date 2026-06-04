@@ -8,12 +8,14 @@ Use the standard notebooks when running from a local checkout:
 - [demo_attntracker.ipynb](demo_attntracker.ipynb)
 - [demo_corer.ipynb](demo_corer.ipynb)
 - [demo_actsteer.ipynb](demo_actsteer.ipynb)
+- [demo_actsteer_no_comma.ipynb](demo_actsteer_no_comma.ipynb)
 
 Use the `_colab.ipynb` notebooks when running in Google Colab:
 
 - [demo_attntracker_colab.ipynb](demo_attntracker_colab.ipynb)
 - [demo_corer_colab.ipynb](demo_corer_colab.ipynb)
 - [demo_actsteer_colab.ipynb](demo_actsteer_colab.ipynb)
+- [demo_actsteer_no_comma_colab.ipynb](demo_actsteer_no_comma_colab.ipynb)
 
 ## Local Notebook Setup
 

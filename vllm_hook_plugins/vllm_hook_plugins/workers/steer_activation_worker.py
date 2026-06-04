@@ -73,7 +73,8 @@ class SteerHookActWorker:
                 self._vector_cache[vector_path] = data
 
             steering_vec = data["dir"].to(slice_view.device, dtype=slice_view.dtype)
-            target = slice_view[-1:]  # (1, hidden)
+            steer_all_tokens = bool(cfg.get("apply_to_all_tokens", False))
+            target = slice_view if steer_all_tokens else slice_view[-1:]
 
             if method == "add_vector":
                 steered = target + coefficient * steering_vec.view(1, -1)
@@ -85,9 +86,12 @@ class SteerHookActWorker:
                 steered = target + coeff * unit_vec.view(1, -1)
             else:
                 raise ValueError(f"Unknown steering method: {method}")
-            # stitch the steered last row back
+            # stitch the steered rows back
             out = slice_view.clone()
-            out[-1:] = steered
+            if steer_all_tokens:
+                out[:] = steered
+            else:
+                out[-1:] = steered
             return out
 
         def steering_hook(input, output, layer_num: int):
