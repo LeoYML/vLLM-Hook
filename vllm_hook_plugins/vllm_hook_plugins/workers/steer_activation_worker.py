@@ -67,9 +67,9 @@ class SteerHookActWorker:
             data = self._vector_cache.get(vector_path)
             if data is None:
                 raw = _load_steering_vector(vector_path)
-                data = {"dir": torch.tensor(raw["dir"])}
-                if method == "adjust_rs":
-                    data["avg_proj"] = raw["avg_proj"]
+                data = {"dir": torch.as_tensor(raw["dir"])}
+                if "avg_proj" in raw:
+                    data["avg_proj"] = torch.as_tensor(raw["avg_proj"])
                 self._vector_cache[vector_path] = data
 
             steering_vec = data["dir"].to(slice_view.device, dtype=slice_view.dtype)
@@ -80,6 +80,10 @@ class SteerHookActWorker:
                 steered = target + coefficient * steering_vec.view(1, -1)
             elif method == "adjust_rs":
                 unit_vec = steering_vec  # use dir as unit vector (matches old behavior)
+                if "avg_proj" not in data:
+                    raise ValueError(
+                        f"Steering vector for adjust_rs must include avg_proj: {vector_path}"
+                    )
                 avg_proj = data["avg_proj"].to(target.device, dtype=target.dtype)
                 current_projections = torch.matmul(target, unit_vec)
                 coeff = (avg_proj - current_projections).unsqueeze(-1)
