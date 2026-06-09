@@ -1,9 +1,44 @@
 # Cache and runtime artifacts
 cache/
 **/__pycache__/
-*.egg-info/
+*.py[cod]
+*$py.class
 
-# debug output
+# Jupyter
+.ipynb_checkpoints/
+
+# Packaging and build artifacts
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Test, coverage, and tool caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# Local environments and secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# OS and editor state
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and debug output
+*.log
 output*.txt
 
 # random test configs
