@@ -1,0 +1,10 @@
+{
+    "steering": {
+        "method": "add_vector",
+        "coefficient": 10,
+        "optimal_layer": 21,
+        "vector_path": "steering_vectors/phi3_response_language_ko.pt",
+        "apply_at_all_positions": true,
+        "apply_to_all_tokens": true
+    }
+}

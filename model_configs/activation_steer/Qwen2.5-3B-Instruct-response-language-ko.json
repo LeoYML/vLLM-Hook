@@ -1,0 +1,10 @@
+{
+    "steering": {
+        "method": "add_vector",
+        "coefficient": 80,
+        "optimal_layer": 28,
+        "vector_path": "steering_vectors/qwen25_response_language_ko.pt",
+        "apply_at_all_positions": true,
+        "apply_to_all_tokens": true
+    }
+}
